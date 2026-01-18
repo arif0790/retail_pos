@@ -18,6 +18,18 @@ from typing import List, Optional
 from sqlalchemy import ForeignKey, String, Integer, Float, DateTime, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship, DeclarativeBase
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+engine = create_engine("sqlite:///db.sqlite3")
+
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine,
+)
+
+
 # ------------------------------------------------------------------
 #  Base class for all models (SQLAlchemy 2.0 style)
 # ------------------------------------------------------------------
@@ -75,7 +87,8 @@ class Product(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     price: Mapped[float] = mapped_column(Float, nullable=False)
-    stock_quantity: Mapped[int] = mapped_column(Integer, default=0)
+    stock_quantity: Mapped[int] = mapped_column(Float, default=0)
+    stock_unit: Mapped[int] = mapped_column(String(20), default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
 
     # Relationship to orders (many-to-many via OrderItem)
