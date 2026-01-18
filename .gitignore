@@ -1,0 +1,20 @@
+# Anaconda environment
+environment.yml
+*.conda.lock
+.env/
+
+# Python byte‑code and caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py~
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+
+# OS & system junk
+.DS_Store
+Thumbs.db
